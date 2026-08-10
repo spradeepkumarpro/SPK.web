@@ -9,6 +9,7 @@
   EDIT ME: Basic page info (this is what Google shows in search results)
 ============================================================ -->
 <title>s.pradeepkumarpro &amp; Profile</title>
+<link rel="icon" href="">
 <meta name="description" content="Pradeepkumar.S — an young soul navigating the world frame by frame. See recent explorations and find all social links in one place.">
 
 <!-- Social share preview (shows up when link is shared on Twitter/FB/etc) -->
@@ -49,6 +50,30 @@
 
   @media (prefers-reduced-motion: reduce){
     * { animation: none !important; transition: none !important; }
+  }
+
+  /* ---- parallax background ---- */
+  .parallax-bg{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://raw.githubusercontent.com/spradeepkumarpro/SPK.web/refs/heads/main/Background.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    will-change: transform;
+  }
+
+  .parallax-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(18, 24, 27, 0.72);
+    z-index: -1;
   }
 
   .wrap{
@@ -216,6 +241,10 @@
 </style>
 </head>
 <body>
+
+<div class="parallax-bg"></div>
+<div class="parallax-overlay"></div>
+  
 <div class="wrap">
 
   <!-- ============================================================
@@ -288,5 +317,25 @@
   <footer>© 2026 Pradeepkumar.S</footer>
 
 </div>
+
+<script>
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    var bg = document.querySelector('.parallax-bg');
+    var ticking = false;
+    function updateParallax() {
+      var scrolled = window.scrollY || window.pageYOffset;
+      bg.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+</script>
+
 </body>
 </html>
