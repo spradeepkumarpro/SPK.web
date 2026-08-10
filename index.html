@@ -325,7 +325,7 @@
     var ticking = false;
     function updateParallax() {
       var scrolled = window.scrollY || window.pageYOffset;
-      bg.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
+      bg.style.transform = 'translateY(' + (-scrolled * 0.5) + 'px)';
       ticking = false;
     }
     window.addEventListener('scroll', function () {
